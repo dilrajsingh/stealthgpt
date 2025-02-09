@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "StealthGPT",
+    "version": "1.0",
+    "description": "Makes ChatGPT look like BBC News.",
+    "permissions": ["activeTab", "storage"],
+    "host_permissions": ["https://chat.openai.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://chat.openai.com/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "commands": {
+      "toggle_disguise": {
+        "suggested_key": { "default": "Ctrl+Shift+H" },
+        "description": "Toggle disguise mode"
+      }
+    }
+  }
+  
