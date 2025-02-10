@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                    // Use ES6 features
+    "module": "ESNext",                  // Use latest JavaScript module system
+    "outDir": "dist",                    // Output compiled JS files to 'dist'
+    "rootDir": "./",                      // Use the project root for source files
+    "strict": true,                       // Enable strict type-checking
+    "esModuleInterop": true,              // Allow default imports from CommonJS modules
+  
+    "forceConsistentCasingInFileNames": true,
+  
+    "sourceMap": true,   // ✅ Enables source maps
+  
+    "types": ["chrome"],   // Add this line
+    "skipLibCheck": true
+  },
+  "include": ["background.ts", "content.ts", "popup.ts"]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "stealthgpt",
+  "version": "1.0.0",
+  "main": "background.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "reload1": "nodemon --watch dist --ext js --exec \"touch manifest.json\"",
+    "reload": "fswatch -o ./dist | while read; do echo 'File changed, reloading...'; touch manifest.json; done",
+    "start": "npm run build && google-chrome --load-extension=$(pwd)",
+    "dev": "npm run watch & npm run reload",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dilrajsingh/stealthgpt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dilrajsingh/stealthgpt/issues"
+  },
+  "homepage": "https://github.com/dilrajsingh/stealthgpt#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/chrome": "^0.0.304",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.3"
+  }
+}
