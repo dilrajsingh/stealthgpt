@@ -5,10 +5,13 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "reload1": "nodemon --watch dist --ext js --exec \"touch manifest.json\"",
-    "reload": "fswatch -o ./dist | while read; do echo 'File changed, reloading...'; touch manifest.json; done",
-    "start": "npm run build && google-chrome --load-extension=$(pwd)",
-    "dev": "npm run watch & npm run reload",
+    "dev": "concurrently \"npm run watch\" \"npm run reload\"",
+    "reload": "nodemon --watch dist --ext js --exec 'touch manifest.json'",
+    "start": "npm run build && concurrently \"google-chrome --load-extension=$(pwd)\" \"start chrome --load-extension=$(pwd)\"",
+    "proxy": "cd proxy-server && npm run dev",
+    "puppeteer-reload": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\"}' npx ts-node reloadChrome.ts",
+    "clean": "rm -rf dist && rm -rf node_modules && npm install",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,7 +28,10 @@
   "description": "",
   "devDependencies": {
     "@types/chrome": "^0.0.304",
+    "concurrently": "^8.0.1",
     "nodemon": "^3.1.9",
+    "puppeteer": "^24.2.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }

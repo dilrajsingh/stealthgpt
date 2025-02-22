@@ -3,11 +3,11 @@
   "name": "StealthGPT",
   "version": "1.0",
   "description": "Change ChatGPT background color on toggle.",
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["https://chat.openai.com/*", "https://chatgpt.com/*", "https://www.bbc.com/*"],
+  "permissions": ["tabs", "activeTab", "scripting"],
+  "host_permissions": ["https://chat.openai.com/*", "https://chatgpt.com/*", "https://www.bbc.com/*", "https://*.wikipedia.org/*"],
   "background": {
     "service_worker": "dist/background.js"
-  },
+  }, 
   "content_scripts": [
     {
       "matches": ["https://chat.openai.com/*", "https://chatgpt.com/*", "https://www.bbc.com/news"],
