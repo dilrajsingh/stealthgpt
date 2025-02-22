@@ -15,10 +15,11 @@ function toggleBackgroundColor(): void {
         return;
     }
 
-    body.style.backgroundColor = isYellow ? "white" : "yellow";
+    const colour = 'yellow'
+    body.style.backgroundColor = isYellow ? "white" : colour;
     isYellow = !isYellow;
 
-    console.log(`Background color changed to ${isYellow ? "yellow" : "white"}`);
+    console.log(`Background color changed to ${isYellow ? colour : "white"}`);
 }
 
 /**
@@ -80,5 +81,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({ status: "Disguise toggled" });
     } else {
         console.warn("Unknown request received:", request);
+    }
+});
+
+
+
+
+
+let originalTitle: string = document.title;
+let isTitleChanged: boolean = false;
+
+function toggleTabTitle(): void {
+    if (document.title.includes("ChatGPT")) {
+        document.title = isTitleChanged ? originalTitle : "Home - BBC News";
+        isTitleChanged = !isTitleChanged;
+        console.log(`🔄 Tab title changed to: ${document.title}`);
+    } else {
+        console.log("✅ Title doesn't match ChatGPT, ignoring...");
+    }
+}
+
+// Listen for messages from the popup script
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.changeTitle) {
+        toggleTabTitle();
+        sendResponse({ status: "Title toggled" });
     }
 });
